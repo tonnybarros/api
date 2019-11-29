@@ -1,4 +1,4 @@
-# MAP-OS API application
+# MAP-OS API
 
 API server in AdonisJs, it comes pre-configured with.
 
