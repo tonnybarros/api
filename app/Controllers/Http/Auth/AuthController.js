@@ -1,8 +1,25 @@
 'use strict'
+const { validateAll } = use('Validator')
+const User = use('App/Models/User')
 
 class AuthController {
 
-  async signup({ request, response, session }) {
+  async signup({ request, response }) {
+
+    const rules = {
+      name: 'required',
+      username: 'required|unique:users,username',
+      email: 'required|email|unique:users,email',
+      password: 'required'
+    }
+
+    const validation = await validateAll(request.all(), rules)
+
+    if (validation.fails()) {
+      return response
+          .status(400)
+          .send(validation.messages())
+    }
 
     const data = request.only(['name', 'username', 'email', 'phone', 'password'])
     const user = await User.create(data)
@@ -10,7 +27,7 @@ class AuthController {
 
   }
 
-  async login({ request }) {
+  async login({ request, auth }) {
 
     const { username, password } = request.all()
     const token = await auth.attempt(username, password)
@@ -25,7 +42,7 @@ class AuthController {
       .authenticator('jwt')
       .revokeTokensForUser(user)
 
-    response.status(200).send()
+    return response.status(200).send()
 
   }
 

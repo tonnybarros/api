@@ -17,5 +17,20 @@
 const Route = use('Route')
 
 Route.get('/ping', () => {
-  return 'Pong'
+  return 'pong'
 })
+
+// Auth routes
+Route.post('/login', 'Auth/AuthController.login').as('auth.login')
+Route.post('/signup', 'Auth/AuthController.signup').as('auth.signup')
+
+
+Route.group(() => {
+  
+
+
+}).middleware(['auth','get_user'])
+
+
+
+
