@@ -39,6 +39,14 @@ class User extends Model {
     return ['password']
   }
 
+  tenants(){
+    return this.belongsToMany('App/Models/Tenant', 'tenant_id', 'user_id').pivotTable('users_tenants').withPivot(['default_tenant', 'status', 'role_id'])
+  }
+
+  roles(){
+    return this.belongsToMany('App/Models/Role', 'role_id', 'user_id').pivotTable('users_tenants').withPivot(['default_tenant', 'status', 'role_id'])
+  }
+
 }
 
 module.exports = User

@@ -22,7 +22,7 @@ class UserSchema extends Schema {
       table.string('name', 80).notNullable()
       table.string('username', 80).notNullable().unique()
       table.string('email', 254).notNullable().unique()
-      table.string('phone', 20).notNullable()
+      table.string('phone', 20)
       table.string('password', 80).notNullable()
       table.boolean('status').notNullable().defaultTo(1)
       table.timestamps()
