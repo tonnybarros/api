@@ -16,21 +16,15 @@
 /** @type {typeof import('@adonisjs/framework/src/Route/Manager')} */
 const Route = use('Route')
 
-Route.get('/ping', () => {
-  return 'pong'
-})
-
-// Auth routes
-Route.post('/login', 'Auth/AuthController.login').as('auth.login')
-Route.post('/signup', 'Auth/AuthController.signup').as('auth.signup')
-
+Route.get('/ping', () => { return 'pong' })
 
 Route.group(() => {
+
+  // Auth routes
+  Route.post('/login', 'Auth/AuthController.login').as('auth.login')
+  Route.post('/signup', 'Auth/AuthController.signup').as('auth.signup')
+
+})
+  .prefix('api/v1')
+  .middleware(['auth', 'get_user'])
   
-
-
-}).middleware(['auth','get_user'])
-
-
-
-
