@@ -18,13 +18,12 @@ const Route = use('Route')
 
 Route.get('/ping', () => { return 'pong' })
 
+// Auth routes
+Route.post('/login', 'Auth/AuthController.login').validator('Auth/Login').as('auth.login')
+Route.post('/signup', 'Auth/AuthController.signup').validator('Auth/Signup').as('auth.signup')
+
 Route.group(() => {
 
-  // Auth routes
-  Route.post('/login', 'Auth/AuthController.login').as('auth.login')
-  Route.post('/signup', 'Auth/AuthController.signup').as('auth.signup')
 
-})
-  .prefix('api/v1')
+}).prefix('api/v1')
   .middleware(['auth', 'get_user'])
-  

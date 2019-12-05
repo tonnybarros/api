@@ -6,21 +6,6 @@ class AuthController {
 
   async signup({ request, response }) {
 
-    const rules = {
-      name: 'required',
-      username: 'required|unique:users,username',
-      email: 'required|email|unique:users,email',
-      password: 'required'
-    }
-
-    const validation = await validateAll(request.all(), rules)
-
-    if (validation.fails()) {
-      return response
-        .status(400)
-        .send(validation.messages())
-    }
-
     const data = request.only(['name', 'username', 'email', 'phone', 'password'])
     const user = await User.create(data)
     return user
@@ -29,22 +14,9 @@ class AuthController {
 
   async login({ request, auth }) {
 
-    const rules = {
-      username: 'required',
-      password: 'required'
-    }
-
-    const validation = await validateAll(request.all(), rules)
-
-    if (validation.fails()) {
-      return response
-        .status(400)
-        .send(validation.messages())
-    }
-
     const { username, password } = request.all()
     const token = await auth.attempt(username, password)
-    return token
+    return { token }
 
   }
 
