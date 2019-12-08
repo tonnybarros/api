@@ -23,11 +23,7 @@ class ExceptionHandler extends BaseExceptionHandler {
    * @return {void}
    */
   async handle (error, { request, response }) {
-    /**
-     * Valida o error do validation
-     */
     if (error.name === 'ValidationException') {
-      // retorna o erro em formato JSON para o front-end
       return response.status(error.status).send(error.messages)
     }
 

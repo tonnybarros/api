@@ -19,6 +19,7 @@ const providers = [
   '@adonisjs/antl/providers/AntlProvider',
   '@adonisjs/validator/providers/ValidatorProvider',
   '@adonisjs/redis/providers/RedisProvider',
+  '@adonisjs/vow/providers/VowProvider',
   'adonis-cache/providers/CacheProvider'
 ]
 
