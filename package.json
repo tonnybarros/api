@@ -1,6 +1,6 @@
 {
   "name": "map-os",
-  "version": "0.1",
+  "version": "1.0.0",
   "adonis-version": "4.1.0",
   "description": "MAP-OS API server",
   "main": "index.js",
@@ -13,17 +13,16 @@
     "api",
     "os"
   ],
-  "author": "",
-  "license": "UNLICENSED",
+  "author": "Ramon Silva",
+  "license": "MIT",
   "private": true,
   "dependencies": {
-    "@adonisjs/ace": "^5.0.8",
     "@adonisjs/antl": "^2.0.7",
     "@adonisjs/auth": "^3.1.0",
     "@adonisjs/bodyparser": "^2.0.5",
     "@adonisjs/cors": "^1.0.7",
     "@adonisjs/fold": "^4.0.9",
-    "@adonisjs/framework": "^5.0.9",
+    "@adonisjs/framework": "^5.0.13",
     "@adonisjs/ignitor": "^2.0.8",
     "@adonisjs/lucid": "^6.1.3",
     "@adonisjs/redis": "^2.0.7",
@@ -32,7 +31,10 @@
     "adonis-cache": "^0.3.4",
     "mysql": "^2.17.1"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "@adonisjs/ace": "^5.0.8",
+    "sqlite3": "^4.1.1"
+  },
   "autoload": {
     "App": "./app"
   }

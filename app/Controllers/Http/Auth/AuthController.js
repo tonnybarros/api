@@ -17,17 +17,19 @@ class AuthController {
     const { username, password } = request.all()
     const token = await auth.attempt(username, password)
     return { token }
-
   }
 
-  async logout({ request, response }) {
+  async logout({ request, auth, response }) {
 
-    const user = await User.find(1)
-    await auth
-      .authenticator('jwt')
-      .revokeTokensForUser(user)
-
-    return response.status(200).send()
+    try {
+      await auth.check()
+      const token = auth.getAuthHeader()
+      return await auth.authenticator('jwt').revokeTokens([token], true)
+    } catch (err) {
+      response
+        .status(400)
+        .json({ type: 'error', message: err })
+    }
 
   }
 

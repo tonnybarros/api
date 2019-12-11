@@ -21,6 +21,7 @@ Route.get('/ping', () => { return 'pong' })
 // Auth routes
 Route.post('/login', 'Auth/AuthController.login').validator('Auth/Login').as('auth.login')
 Route.post('/signup', 'Auth/AuthController.signup').validator('Auth/Signup').as('auth.signup')
+Route.post('/logout', 'Auth/AuthController.logout').as('auth.logout')
 
 Route.group(() => {
 
