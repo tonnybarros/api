@@ -12,19 +12,29 @@ class AuthController {
 
   }
 
-  async login({ request, auth }) {
+  async login({ request, auth, response }) {
 
     const { username, password } = request.all()
-    const token = await auth.attempt(username, password)
-    return { token }
+    try {
+
+      const result = await auth.withRefreshToken().attempt(username, password)
+      return { token: result.token, refresh_token: result.refreshToken }
+
+    } catch (err) {
+      response
+        .status(400)
+        .json({ type: 'error', message: err })
+    }
   }
 
   async logout({ request, auth, response }) {
 
     try {
-      await auth.check()
-      const token = auth.getAuthHeader()
-      return await auth.authenticator('jwt').revokeTokens([token], true)
+      
+      const refresh_token = request.only('refresh_token')
+
+      await auth.authenticator('jwt').revokeTokens([refresh_token])
+      return response.status(200).send()
     } catch (err) {
       response
         .status(400)
