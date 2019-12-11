@@ -19,7 +19,6 @@ const providers = [
   '@adonisjs/antl/providers/AntlProvider',
   '@adonisjs/validator/providers/ValidatorProvider',
   '@adonisjs/redis/providers/RedisProvider',
-  '@adonisjs/vow/providers/VowProvider',
   'adonis-cache/providers/CacheProvider'
 ]
 
@@ -34,6 +33,7 @@ const providers = [
 */
 const aceProviders = [
   '@adonisjs/lucid/providers/MigrationsProvider',
+  '@adonisjs/vow/providers/VowProvider',
   'adonis-cache/providers/CommandsProvider'
 ]
 
