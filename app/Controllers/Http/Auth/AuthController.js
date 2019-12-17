@@ -21,7 +21,7 @@ class AuthController {
       return { token: result.token, refresh_token: result.refreshToken }
 
     } catch (err) {
-      response
+      return response
         .status(400)
         .json({ type: 'error', message: err })
     }
@@ -36,7 +36,7 @@ class AuthController {
       await auth.authenticator('jwt').revokeTokens([refresh_token])
       return response.status(200).send()
     } catch (err) {
-      response
+      return response
         .status(400)
         .json({ type: 'error', message: err })
     }
