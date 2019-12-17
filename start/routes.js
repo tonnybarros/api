@@ -16,7 +16,7 @@
 /** @type {typeof import('@adonisjs/framework/src/Route/Manager')} */
 const Route = use('Route')
 
-Route.get('/ping', () => { return 'pong' })
+Route.get('/ping', () => { return 'pong' }).middleware(['auth', 'get_user'])
 
 // Auth routes
 Route.post('/login', 'Auth/AuthController.login').validator('Auth/Login').as('auth.login')
@@ -25,6 +25,7 @@ Route.post('/logout', 'Auth/AuthController.logout').as('auth.logout')
 
 Route.group(() => {
 
+  Route.resource('customer', 'CustomerController')
 
 }).prefix('api/v1')
   .middleware(['auth', 'get_user'])
